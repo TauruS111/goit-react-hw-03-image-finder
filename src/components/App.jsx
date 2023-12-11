@@ -103,7 +103,9 @@ class App extends Component {
         />
         {isLoading && <Loader />}
         {images.length > 0 && images.length >= 12 && (
-          <Button onClick={this.handleLoadMore} disabled={isLoading} />
+          <div className="BtnCenter">
+            <Button onClick={this.handleLoadMore} disabled={isLoading} />
+          </div>
         )}
       </div>
     );
