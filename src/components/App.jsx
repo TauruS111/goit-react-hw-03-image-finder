@@ -42,7 +42,7 @@ class App extends Component {
         isVisible: prevState.page < Math.ceil(totalHits / 12),
       }));
     } catch (error) {
-      this.setState({ error: 'oops something went wrong 😭(' });
+      this.setState({ error: '❌ Oops something went wrong 😭' });
     } finally {
       this.setState({ isLoading: false });
     }
@@ -82,7 +82,7 @@ class App extends Component {
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {isEmpty && <h2>Sorry. There are no images ... 😭</h2>}
-        {error && <h2>❌ Something went wrong - {error}</h2>}
+        {error && <h2>{error}</h2>}
         <ImageGallery>
           {images.map(image => (
             <ImageGalleryItem

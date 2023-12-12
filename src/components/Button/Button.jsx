@@ -1,10 +1,11 @@
 import React from 'react';
+import css from './Buttom.module.css';
 
 const Button = ({ onClick, disabled }) => {
   return (
     <button
       type="button"
-      className="Button"
+      className={css.Button}
       onClick={onClick}
       disabled={disabled}
     >
