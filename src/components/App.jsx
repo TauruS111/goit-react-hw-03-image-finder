@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 import { ImgModal } from './Modal/Modal';
@@ -75,26 +75,25 @@ class App extends Component {
   };
 
   render() {
-    const { images, isLoading, isEmpty, error, showModal, largeImg, tags } =
-      this.state;
+    const {
+      images,
+      isLoading,
+      isEmpty,
+      error,
+      showModal,
+      largeImg,
+      tags,
+      isVisible,
+    } = this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {isEmpty && <h2>Sorry. There are no images ... 😭</h2>}
         {error && <h2>{error}</h2>}
-        <ImageGallery>
-          {images.map(image => (
-            <ImageGalleryItem
-              key={image.id}
-              src={image.webformatURL}
-              alt={image.tags}
-              onClick={() =>
-                this.handleImageClick(image.webformatURL, image.tags)
-              }
-            />
-          ))}
-        </ImageGallery>
+        {images.length > 0 && (
+          <ImageGallery images={images} onClick={this.handleImageClick} />
+        )}
         <ImgModal
           modalIsOpen={showModal}
           closeModal={this.handleImageClose}
@@ -102,7 +101,7 @@ class App extends Component {
           tags={tags}
         />
         {isLoading && <Loader />}
-        {images.length > 0 && images.length >= 12 && (
+        {isVisible && !isLoading && images.length > 0 && (
           <div className="BtnCenter">
             <Button onClick={this.handleLoadMore} disabled={isLoading} />
           </div>
